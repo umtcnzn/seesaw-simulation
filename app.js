@@ -1,6 +1,7 @@
 let weights = [];
 
 const plank = document.querySelector('.plank');
+const resetBtn = document.querySelector('#reset-button');
 const leftWeightText = document.querySelector('#left-weight-text');
 const rightWeightText = document.querySelector('#right-weight-text');
 
@@ -19,11 +20,16 @@ plank.addEventListener('click', (event) => {
     weightElement.style.left = `${clickedX}px`;
     plank.appendChild(weightElement);
     weights.push({ element: weightElement, distance: distanceFromCenter, weight, direction: clickedX < centerX ? 'left' : 'right' });
+    saveWeights();
     updateSeesaw();
 })
 
-
-
+resetBtn.addEventListener('click', () => {
+    document.querySelectorAll('.weight').forEach(weight => weight.remove());
+    weights = [];
+    saveWeights();
+    updateSeesaw();
+});
 
 const createWeight = (weight) => {
     const weightElement = document.createElement('div');
@@ -55,7 +61,39 @@ const updateSeesaw = () => {
     });
 
     const tiltAngle = Math.max(-30, Math.min(30, (totalRightTorque - totalLeftTorque) / 100));
+    console.log(`Left Torque: ${totalLeftTorque}, Right Torque: ${totalRightTorque}, Tilt Angle: ${tiltAngle}`);
     plank.style.transform = `rotate(${tiltAngle}deg)`;
     leftWeightText.textContent = totalLeftWeight;
     rightWeightText.textContent = totalRightWeight;
+}
+
+saveWeights = () => {
+    if (weights.length === 0) {
+        localStorage.removeItem('weights');
+        return;
+    }
+    localStorage.setItem('weights', JSON.stringify(weights));
+}
+
+loadWeights = () => {
+    const savedWeights = JSON.parse(localStorage.getItem('weights'));
+    if (savedWeights) {
+        weights = savedWeights;
+    }
+}
+
+initWeights = () => {
+    loadWeights();
+    weights.forEach((weight) => {
+        const weightElement = createWeight(weight.weight);
+        const plankWidth = plank.offsetWidth / 2;
+        const positionX = weight.direction === 'left' ? plankWidth - weight.distance : plankWidth + weight.distance;
+        weightElement.style.left = `${positionX}px`;
+        plank.appendChild(weightElement);
+    });
+    updateSeesaw();
+}
+
+window.onload = () => {
+    initWeights();
 }

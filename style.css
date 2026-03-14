@@ -9,6 +9,7 @@ body{
 }
 
 .weightboard {
+    flex-grow: 0.1;
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -16,7 +17,7 @@ body{
 }
 
 .seesaw-container{
-    flex-grow: 1;
+    flex-grow: 0.7;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -51,4 +52,14 @@ body{
     position: absolute;
     transform: translateX(-50%);
     bottom: 100%;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+#reset-button {
+    margin: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
 }
