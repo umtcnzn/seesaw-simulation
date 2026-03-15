@@ -1,7 +1,7 @@
 # Seesaw Simulation
 
 ## Live Demo
-[Click here to see the live project]
+[Access the live demo](https://umtcnzn.github.io/seesaw-simulation/)
 
 ## 1. Thought Process & Design Decisions
 Since external frameworks were not allowed, my main goal was to build a clean, pure JavaScript application. Coming from a background where I frequently use state management tools like Redux or Vue's reactivity, I applied a similar "Single Source of Truth" logic here using Vanilla JS. 
