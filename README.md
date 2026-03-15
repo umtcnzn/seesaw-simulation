@@ -1,4 +1,4 @@
-# Seesaw Simulation - Insider Case
+# Seesaw Simulation
 
 ## Live Demo
 [Click here to see the live project]
