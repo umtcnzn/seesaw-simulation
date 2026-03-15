@@ -76,7 +76,7 @@ const updateSeesaw = () => {
     rightWeightText.textContent = totalRightWeight;
 }
 
-saveWeights = () => {
+const saveWeights = () => {
     if (weights.length === 0) {
         localStorage.removeItem('weights');
         return;
@@ -84,14 +84,14 @@ saveWeights = () => {
     localStorage.setItem('weights', JSON.stringify(weights));
 }
 
-loadWeights = () => {
+const loadWeights = () => {
     const savedWeights = JSON.parse(localStorage.getItem('weights'));
     if (savedWeights) {
         weights = savedWeights;
     }
 }
 
-initWeights = () => {
+const initWeights = () => {
     loadWeights();
     weights.forEach((weight) => {
         const weightElement = createWeight(weight.weight);
